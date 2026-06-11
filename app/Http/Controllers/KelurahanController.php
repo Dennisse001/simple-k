@@ -14,7 +14,6 @@ class KelurahanController extends Controller
     }
 
     public function daftarSurat(){
-        $semuaSurat = Surat::with('penduduk')->get();
-        return view('surat_index',compact('semuaSurat'));
+
     }
 }
