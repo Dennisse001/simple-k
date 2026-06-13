@@ -65,7 +65,8 @@ class SuratController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $surat = Surat::findOrFail($id);
+        return view('surat.edit', compact('surat'));
     }
 
     /**
@@ -73,7 +74,19 @@ class SuratController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+     $surat = Surat::findOrFail($id);
+     $validatedData = $request->validate([
+        'nomor_surat' => 'required|max:50|unique:surats,nomor_surat,' . $surat->id,
+        'jenis_surat' => 'required',
+        'tanggal_ajuan' => 'required|date'
+    ], [
+        'nomor_surat.required' => 'Nomor surat wajib diisi.',
+        'nomor_surat.unique' => 'Nomor surat ini telah terdaftar pada sistem.'
+    ]);
+
+     $surat -> update($validatedData);
+
+         return redirect()->route('surat.index')->with('sukses', 'Data surat berhasil diperbarui!');
     }
 
     /**
@@ -81,6 +94,9 @@ class SuratController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $surat = Surat::findOrFail($id);
+        $surat -> delete();
+
+        return redirect()->route('surat.index')-> with('sukses','data berhasil dihapus!');
     }
 }

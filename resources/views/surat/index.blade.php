@@ -9,7 +9,7 @@
         <p class="mb-4">
             Data seluruh surat yang telah diajukan oleh penduduk.
         </p>
-        
+
         <!-- Card Tabel -->
         <div class="card shadow mb-4">
 
@@ -20,13 +20,13 @@
                 </h6>
                 <br>
                 <a href="{{ route('surat.create') }}" class="btn btn-primary btn-icon-split">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-flag"></i>
-                                        </span>
-                                        <span class="text">Tambah Data Pengajuan</span>
-                                    </a>
+                    <span class="icon text-white-50">
+                        <i class="fas fa-flag"></i>
+                    </span>
+                    <span class="text">Tambah Data Pengajuan</span>
+                </a>
             </div>
-            
+
 
             <!-- Body Card -->
             <div class="card-body">
@@ -42,6 +42,7 @@
                                 <th>Nama Pemohon</th>
                                 <th>NIK Pemohon</th>
                                 <th>Tanggal Ajuan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
 
@@ -54,6 +55,17 @@
                                     <td>{{ $s->penduduk->nama }}</td>
                                     <td>{{ $s->penduduk->nik }}</td>
                                     <td>{{ $s->tanggal_ajuan }}</td>
+                                    <td><a class="btn btn-warning" href="{{ route('surat.edit', $s->id) }}">Edit</a>
+                                    <form action="{{ route('surat.destroy', $s->id) }}" method="POST"
+                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data surat ini?')"
+                                        class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">
+                                            <i class="fas fa-trash"></i> Hapus
+                                        </button>
+                                    </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
