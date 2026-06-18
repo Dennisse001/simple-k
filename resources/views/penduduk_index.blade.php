@@ -1,49 +1,104 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('template.template')
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+@section('content')
+    <div class="container-fluid">
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Data Penduduk!</h1>
+        <!-- Judul Halaman -->
+        <h1 class="h3 mb-2 text-gray-800">Data Penduduk</h1>
 
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>NIK</th>
-                <th>NAMA</th>
-                <th>JK</th>
-                <th>ALAMAT</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach($warga as $item)
-            <tr>
-                <td>{{ $item->nik }}</td>
-                <td>{{ $item->nama }}</td>
-                <td>{{ $item->jk }}</td>
-                <td>{{ $item->alamat }}</td>
-            </tr>
+        <p class="mb-4">
+            Data seluruh penduduk.
+        </p>
 
-        @endforeach
-        </tbody>
-    </table>
+        <!-- Card Tabel -->
+        <div class="card shadow mb-4">
 
-    <!-- Optional JavaScript; choose one of the two! -->
+            <!-- Header Card -->
+            <div class="card-header py-1">
+                <br>
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Daftar Penduduk
+                </h6>
+                <br>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+            </div>
 
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-  </body>
-</html>
+
+            <!-- Body Card -->
+            <div class="card-body">
+                <div class="table-responsive">
+
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                        <!-- Header Tabel -->
+                        <thead>
+                            <tr>
+                                <th>NIK</th>
+                                <th>NAMA</th>
+                                <th>JK</th>
+                                <th>ALAMAT</th>
+                            </tr>
+                        </thead>
+
+                        <!-- Isi Tabel -->
+                        <tbody>
+                            @foreach ($warga as $item)
+                                <tr>
+                                    <td>{{ $item->nik }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->jk }}</td>
+                                    <td>{{ $item->alamat }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+
+                        <!-- Footer Tabel -->
+
+                    </table>
+
+                </div>
+            </div>
+            <div class="card-header py-1">
+                <br>
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Daftar Pengguna
+                </h6>
+                <br>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                        <!-- Header Tabel -->
+                        <thead>
+                            <tr>
+                                <th>NAMA</th>
+                                <th>EMAIL</th>
+
+                            </tr>
+                        </thead>
+
+                        <!-- Isi Tabel -->
+                        <tbody>
+                            @foreach ($user as $u)
+                                <tr>
+                                    <td>{{ $u->name }}
+                                    <td>{{ $u->email }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+
+                        <!-- Footer Tabel -->
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+@endsection

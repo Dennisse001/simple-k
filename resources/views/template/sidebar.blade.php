@@ -11,6 +11,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
+
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.html">
@@ -18,11 +19,17 @@
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item active">
+                <a class="nav-link" href="{{url('/penduduk')}}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Penduduk</span></a>
+            </li>
+            <li class="nav-item active">
                 <a class="nav-link" href="{{url('/surat')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Surat</span></a>
             </li>
-            
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -36,16 +43,16 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                    <i class="fa fa-cog"></i>
                     <span>Components</span>
                 </a>
-              
+
             </li>
 
-          
 
-          
 
-       
+           
+
+
 
         </ul>
