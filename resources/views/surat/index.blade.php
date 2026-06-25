@@ -42,29 +42,63 @@
                                 <th>Nama Pemohon</th>
                                 <th>NIK Pemohon</th>
                                 <th>Tanggal Ajuan</th>
+                                <th>Berkas Pendukung</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
 
                         <!-- Isi Tabel -->
                         <tbody>
+
                             @foreach ($semuaSurat as $s)
+                            
                                 <tr>
                                     <td>{{ $s->nomor_surat }}</td>
                                     <td>{{ $s->jenis_surat }}</td>
                                     <td>{{ $s->penduduk->nama }}</td>
                                     <td>{{ $s->penduduk->nik }}</td>
                                     <td>{{ $s->tanggal_ajuan }}</td>
-                                    <td><a class="btn btn-warning" href="{{ route('surat.edit', $s->id) }}">Edit</a>
-                                    <form action="{{ route('surat.destroy', $s->id) }}" method="POST"
-                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus data surat ini?')"
-                                        class="d-inline">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fas fa-trash"></i> Hapus
-                                        </button>
-                                    </form>
+                                    <td>
+                                        @if ($s->berkas_pendukung)
+                                            @php
+                                                $ext = strtolower(pathinfo($s->berkas_pendukung, PATHINFO_EXTENSION));
+                                            @endphp
+
+                                            @if (in_array($ext, ['jpg', 'png']))
+                                                <a href="{{ asset('storage/' . $s->berkas_pendukung) }}" target="_blank">
+                                                    <img src="{{ asset('storage/' . $s->berkas_pendukung) }}"
+                                                        alt="Berkas Pendukung" class="rounded shadow-sm border"
+                                                        style="width: 58px; height: 58px; object-fit: cover;">
+                                                </a>
+                                            @elseif($ext === 'pdf')
+                                                <a href="{{ asset('storage/' . $s->berkas_pendukung) }}" target="_blank"
+                                                    class="btn btn-outline-danger btn-sm">
+                                                    Lihat PDF
+                                                </a>
+                                            @else
+                                                <span class="badge bg-secondary">File tersedia</span>
+                                            @endif
+                                        @else
+                                            <span class="badge bg-warning text-dark">Belum ada berkas</span>
+                                        @endif
+                                    </td>
+
+                                    <td><a href="{{ route('surat.cetak', $s->id) }}" class="btn btn-primary"
+                                            target="_blank">
+                                            Cetak PDF
+                                        </a>
+
+                                        <a class="btn btn-warning" href="{{ route('surat.edit', $s->id) }}">Edit</a>
+                                        <form action="{{ route('surat.destroy', $s->id) }}" method="POST"
+                                            onsubmit="return confirm('Apakah Anda yakin ingin menghapus data surat ini?')"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </button>
+
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Surat extends Model
 {
-    protected $fillable = ['nomor_surat','jenis_surat','tanggal_ajuan','penduduk_id'];
+    protected $fillable = ['nomor_surat','jenis_surat','tanggal_ajuan','penduduk_id','berkas_pendukung'];
     public function penduduk() : BelongsTo{
         return $this->belongsTo(Penduduk::class);
     }
